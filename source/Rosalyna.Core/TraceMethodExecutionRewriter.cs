@@ -19,20 +19,7 @@ namespace Rosalyna.Core
             var result = (MethodDeclarationSyntax) base.VisitMethodDeclaration(node);
             var body = node.Body.Update(Syntax.Token(SyntaxKind.OpenBraceToken), statements, Syntax.Token(SyntaxKind.CloseBraceToken));
 
-            return result.Update
-                (
-                    attributeLists: result.AttributeLists,
-                    modifiers: result.Modifiers,
-                    returnType: result.ReturnType,
-                    explicitInterfaceSpecifier: result.ExplicitInterfaceSpecifier,
-                    identifier: result.Identifier,
-                    typeParameterList: result.TypeParameterList,
-                    parameterList: result.ParameterList,
-                    constraintClauses: result.ConstraintClauses,
-                    body: body,
-                    semicolonToken: result.SemicolonToken
-                );
-
+            return result.WithBody(body);
         }
     }
 }
