@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Rosalyna.Core.RunTime;
 using Roslyn.Compilers.CSharp;
 
 namespace Rosalyna.Core.Fixture
@@ -19,7 +20,7 @@ namespace Rosalyna.Core.Fixture
                             }";
 
             var tree = SyntaxTree.ParseText(@class);
-            var rewriter = new TraceMethodExecutionRewriter();
+            var rewriter = new TraceMethodExecutionRewriter(new DefaultTraceConventions());
             var target = rewriter.Visit(tree.GetRoot());
 
             var hasBeenInjected = target.ToString().Contains("rosalyning");
